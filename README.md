@@ -33,7 +33,8 @@ Any line that doesn't contain the structure listed here will be ignored.
 
 ## Usage
 
-Update the `CACHE` and `CONFIG` variable to your need.
+Update the `CACHE_FILE` and `CONFIG` variable to your need or set and export them before
+calling the rofi command.
 
 Launch the script with:
 ```
@@ -47,6 +48,6 @@ You may add the following `bindsym` in you `i3` config file:
 bindsym $mod+shift+comma exec rofi -modi shortcut:~/.config/rofi/scripts/shortcut.sh -show shortcut
 ```
 
-Selectionning a shortcut launch the associated command via `i3-msg`.
+Selecting a shortcut launch the associated command via `i3-msg`.
  
 

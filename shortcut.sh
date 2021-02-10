@@ -1,14 +1,16 @@
 #!/bin/bash
 
-CACHE="$HOME/.cache/rofi-shortcut"
-CONFIG="$HOME/.config/i3/config"
+set -eo pipefail
+
+: "${CACHE_FILE:="$HOME/.cache/rofi-shortcut"}"
+: "${CONFIG:="$HOME/.config/i3/config"}"
 
 echo -e "\0markup-rows\x1ftrue\n"
 
 function parse {
-   if [[ $CACHE -nt $CONFIG ]]
+   if [[ $CACHE_FILE -nt $CONFIG ]]
    then
-      cat "$CACHE"
+      cat "$CACHE_FILE"
    else
       while read -r line
       do
@@ -17,7 +19,7 @@ function parse {
 	 command=$(echo "$line" | sed -e 's/.*##.*bind[^ ]* *[^ ]* *\(.*\)/\1/')
 	 meta=$(echo "$line" | sed -e 's/.*##.*bind[^ ]* \(.*\)/\1/' | xml esc)
 	 printf "%s\0info\x1f%s\x1fmeta\x1f%s\n" "$help" "$command" "$meta" 
-      done | tee "$CACHE"
+      done | tee "$CACHE_FILE"
    fi
 }
 
