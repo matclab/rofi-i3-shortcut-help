@@ -33,6 +33,8 @@ Any line that doesn't contain the structure listed here will be ignored.
 
 ## Usage
 
+Update the `CACHE` and `CONFIG` variable to your need.
+
 Launch the script with:
 ```
 rofi -modi shortcut:~/full/path/to/shortcut.sh -show shortcut
