@@ -6,7 +6,7 @@ This is a small shell *modi* script for rofi for presenting keybinding hints.  I
 
 The program functions by scanning and parsing comments in a specific format (use by regolith *remontoire* tool and described directly below), then displaying them in rofi. 
 
-[[screenshot.png]]
+![Screenshot of the rofi helper running](screenshot.png "Screenshot of rofi i3 shortcut help")
 
 ## Model
 
