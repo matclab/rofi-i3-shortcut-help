@@ -26,8 +26,8 @@ function parse {
 if [[ $ROFI_RETV == 0 ]]
 then
    # initial call
-   rg -N -A1 '^ *##' "$CONFIG"  \
-      | rg -v '^--'| sed '$!N;s/\n/ /' | sed -e 's/^ *## *//'| parse \
+   grep -A1 '^ *##' "$CONFIG"  \
+      | grep -v '^--'| sed '$!N;s/\n/ /' | sed -e 's/^ *## *//'| parse \
       | sort -k2 -t"	" \
       | tr "\0" "\v" | column -t -s $'\t' | tr "\v" "\0"
 else 
