@@ -16,10 +16,10 @@ function parse {
    else
       while read -r line
       do
-	 help=$(echo "$line" | xml esc | \
+	 help=$(echo "$line" | xmlstarlet esc | \
 	    sed -e 's!\(.*\)\/\/ *\(.*\)\/\/ *\(.*\)##.*!<b>\2</b><span foreground="grey">\1</span>\t<tt>\3</tt>!')
 	 command=$(echo "$line" | sed -e 's/.*##.*bind[^ ]* *[^ ]* *\(.*\)/\1/')
-	 meta=$(echo "$line" | sed -e 's/.*##.*bind[^ ]* \(.*\)/\1/' | xml esc)
+	 meta=$(echo "$line" | sed -e 's/.*##.*bind[^ ]* \(.*\)/\1/' | xmlstarlet esc)
 	 printf "%s\0info\x1f%s\x1fmeta\x1f%s\n" "$help" "$command" "$meta" 
       done | tee "$CACHE_FILE"
    fi
