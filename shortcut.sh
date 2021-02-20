@@ -2,8 +2,10 @@
 
 set -eo pipefail
 
-: "${CACHE_FILE:="$HOME/.cache/rofi-shortcut"}"
-: "${CONFIG:="$HOME/.config/i3/config"}"
+: "${XDG_CACHE_HOME:="$HOME"/.cache}"
+: "${CACHE_FILE:="$XDG_CACHE_HOME/rofi-shortcut"}"
+: "${XDG_CONFIG_HOME:="$HOME"/.config}"
+: "${CONFIG:="$XDG_CONFIG_HOME/i3/config"}"
 
 echo -e "\0markup-rows\x1ftrue\n"
 
