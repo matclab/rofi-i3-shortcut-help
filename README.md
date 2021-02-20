@@ -31,6 +31,12 @@ bindsym $mod+space exec $i3-wm.program.launcher.app
 
 Any line that doesn't contain the structure listed here will be ignored.
 
+## Requirements
+You need:
+
+- `xmlstarlet`  package (use to escape input for pango markup).
+- `i3-msg` binary from `i3` in order to launch the command associated to the shortcut.
+
 ## Usage
 
 Update the `CACHE_FILE` and `CONFIG` variable to your need or set and export them before
