@@ -34,6 +34,7 @@ Any line that doesn't contain the structure listed here will be ignored.
 ## Requirements
 You need:
 
+- `rofi >= 1.6.0`
 - `xmlstarlet`  package (use to escape input for pango markup).
 - `i3-msg` binary from `i3` in order to launch the command associated to the shortcut.
 
