@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -eo pipefail
 
@@ -7,7 +7,6 @@ set -eo pipefail
 : "${XDG_CONFIG_HOME:="$HOME"/.config}"
 : "${CONFIG:="$XDG_CONFIG_HOME/i3/config"}"
 
-echo -e "\0markup-rows\x1ftrue\n"
 
 function parse {
    if [[ $CACHE_FILE -nt $CONFIG ]]
@@ -25,14 +24,24 @@ function parse {
    fi
 }
 
-if [[ $ROFI_RETV == 0 ]]
-then
-   # initial call
-   grep -A1 '^ *##' "$CONFIG"  \
-      | grep -v '^--'| sed '$!N;s/\n/ /' | sed -e 's/^ *## *//'| parse \
-      | sort -k2 -t"	" \
-      | tr "\0" "\v" | column -t -s $'\t' | tr "\v" "\0"
-else 
-   # ROFI_INFO contains the i3 command
-   exec i3-msg "$ROFI_INFO" >/dev/null 2>&1
-fi
+: "${_PARSE:=parse}"  # for integratin testing
+: "${_I3MSG:=i3-msg}"  # for integratin testing
+
+function main()
+{
+   echo -e "\0markup-rows\x1ftrue\n"
+   if [[ $ROFI_RETV == 0 ]]
+   then
+      # initial call
+      grep -A1 '^ *##' "$CONFIG"  \
+	 | grep -v '^--'| sed '$!N;s/\n/ /' | sed -e 's/^ *## *//'| "$_PARSE" \
+	 | sort -k2 -t"	" \
+	 | tr "\0" "\v" | column -t -s $'\t' | tr "\v" "\0"
+   elif  [[ -n  "$ROFI_INFO" ]]
+   then
+      # ROFI_INFO contains the i3 command
+      exec "$_I3MSG" "$ROFI_INFO" >/dev/null 2>&1
+   fi
+}
+
+main
