@@ -1,0 +1,12 @@
+variables:
+   GIT_SUBMODULE_STRATEGY: recursive
+
+image:
+   name: registry.gitlab.com/matclab/rofi-i3-shortcut-help/rish-test:0.1
+
+test:
+   script:
+      - bats --formatter junit tests
+   artifacts:
+      reports:
+         junit: TestReport*.xml
