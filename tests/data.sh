@@ -9,6 +9,7 @@ EOT
 
 function default_config() {
    cat > "$CONFIG" <<EOT
+####### Long section comment ########
 ## Workspaces // Move to next //  <tab>  ##
 bindsym blob exec blob
 ## Outputs // Focus change //  <alt> ← → ↑ ↓  ##

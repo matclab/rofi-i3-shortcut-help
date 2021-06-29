@@ -33,7 +33,7 @@ function main()
    if [[ $ROFI_RETV == 0 ]]
    then
       # initial call
-      grep -A1 '^ *##' "$CONFIG"  \
+      grep -A1 '^ *##[^#]' "$CONFIG"  \
 	 | grep -v '^--'| sed '$!N;s/\n/ /' | sed -e 's/^ *## *//'| "$_PARSE" \
 	 | sort -k2 -t"	" \
 	 | tr "\0" "\v" | column -t -s $'\t' | tr "\v" "\0"
