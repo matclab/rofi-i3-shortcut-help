@@ -33,11 +33,13 @@ function main()
    if [[ $ROFI_RETV == 0 ]]
    then
       # initial call
-      grep -A1 '^ *##[^#]' "$CONFIG"  \
-	 | grep -v '^--'| sed '$!N;s/\n/ /' | sed -e 's/^ *## *//'| "$_PARSE" \
-	 | sort -k2 -t"	" \
-	 | tr "\0" "\v" | column -t -s $'\t' | tr "\v" "\0"
-   elif  [[ -n  "$ROFI_INFO" ]]
+      grep -A1 '^ *##[^#]' "$CONFIG"  |
+	 grep -v '^--' | # remove -- separator added by grep
+	 sed '$!N;s/\n/ /' | # join lines two by two
+	 sed -e 's/^ *## *//'| # remove front marker ##
+	 "$_PARSE" | sort -k2 -t"	" |
+	 tr "\0" "\v" | column -t -s $'\t' | tr "\v" "\0"
+  elif  [[ -n  "$ROFI_INFO" ]]
    then
       # ROFI_INFO contains the i3 command
       exec "$_I3MSG" "$ROFI_INFO" >/dev/null 2>&1
